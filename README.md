@@ -19,6 +19,10 @@ example
     │
     └───demo
         │   
+        └───character（字符操作）
+        │   │str.go（字符串方法）
+        │   │
+        │
         └───cryptology（加密解密）
         │   │   md5.go（md5加密方法）
         │   │

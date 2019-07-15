@@ -5,7 +5,7 @@ import "time"
 /**
  * 迭代器中使用线程的陷阱
  */
-func GoParam() {
+func Foreach() {
 	println("直接使用参数")
 	for i := 0; i < 5; i++ {
 		go func() {
