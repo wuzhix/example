@@ -39,6 +39,10 @@ func EsScroll() {
 		cs <- 1
 		wg.Add(1)
 		go func(result *elastic.SearchResult) {
+			defer func() {
+				<-cs
+				wg.Done()
+			}()
 			for _, hit := range result.Hits.Hits {
 				item := make(map[string]interface{})
 				err := json.Unmarshal(*hit.Source, &item)
