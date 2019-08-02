@@ -57,3 +57,19 @@ func EsScroll() {
 		}(res)
 	}
 }
+
+func BulkEs() {
+	url := []string{"http://127.0.0.1:9200", "http://127.0.0.1:9201"}
+	index := "index_name"
+	indexType := "index_type"
+	ctx := context.Background()
+	es, _ := elastic.NewClient(elastic.SetSniff(false), elastic.SetURL(url...))
+	bulk := es.Bulk().Index(index).Type(indexType)
+	data := map[string]string{
+		"s1": "s1",
+		"s2": "s2",
+	}
+	r := elastic.NewBulkIndexRequest().Index(index).Type("doc").Doc(&(data))
+	bulk.Add(r)
+	bulk.Do(ctx)
+}
