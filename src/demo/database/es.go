@@ -64,12 +64,12 @@ func BulkEs() {
 	indexType := "index_type"
 	ctx := context.Background()
 	es, _ := elastic.NewClient(elastic.SetSniff(false), elastic.SetURL(url...))
-	bulk := es.Bulk().Index(index).Type(indexType)
+	bulk := es.Bulk()
 	data := map[string]string{
 		"s1": "s1",
 		"s2": "s2",
 	}
-	r := elastic.NewBulkIndexRequest().Index(index).Type("doc").Doc(&(data))
+	r := elastic.NewBulkIndexRequest().Index(index).Type(indexType).Doc(&(data))
 	bulk.Add(r)
 	bulk.Do(ctx)
 }
